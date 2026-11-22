@@ -21,6 +21,23 @@ dsh web
 
 卸载：`dsh plugin --profile web remove dsh-codex-app-server`（Desktop 换成 `desktop`）。卸载不会删除 Codex 历史。
 
+### 在独立 Web profile 试用
+
+如果只想验证插件，不必停止正在运行的 DSH，也不必改默认 profile。先在源码目录运行上面的 `npm test` 和 `npm pack`，然后用本地生成的 tarball（不要安装 npm 上的同名包）：
+
+```sh
+(
+  set -e
+  export DSH_HOME="$HOME/.dsh-codex-rc5-preview"
+  npx --yes --package=@deepseek-ai/dsh@0.2.2-rc.5 --package=pnpm@11.28.5 \
+    dsh plugin --profile web add "$PWD/dsh-codex-app-server-0.1.0.tgz"
+  npx --yes --package=@deepseek-ai/dsh@0.2.2-rc.5 \
+    dsh web --host 127.0.0.1 --port 3081 --no-open
+)
+```
+
+如果 3081 已被占用，换一个空闲端口即可。用浏览器打开本次启动时终端打印的完整链接（含 `?token=…`）；没有该服务会话 Cookie 的浏览器直接打开裸地址会收到 401，不代表插件没加载。不要分享含 token 的链接。新建会话并确认能选择 **Codex**，不用发送消息。用当前终端的 Ctrl+C 停止预览。
+
 ## 目前支持
 
 | 能力 | 当前行为 |
