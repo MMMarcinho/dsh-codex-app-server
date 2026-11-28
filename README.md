@@ -34,6 +34,8 @@ dsh web
 
 插件面向你信任的**本地 DSH 服务**。启动 Codex 子进程时使用会话工作目录，向 thread/start 和 thread/resume 显式传入 `workspace-write`、`on-request`，由用户审批，不启用自动审批。Codex 使用当前系统用户的本地配置。不要把该 profile 暴露给不信任的远程用户。
 
+新建会话里找不到 Codex？见[按版本、profile 和启动进程排查](docs/missing-codex-mode.md)。
+
 ## 验证
 
 ```sh
